@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat — PowerLLM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void: #150B1E;
+    --plum: #241033;
+    --plum-soft: #33184A;
+    --filament: #FFB627;
+    --arc: #FF5E5B;
+    --wire: #7B5EA7;
+    --glow: #F5EDFF;
+    --dim: #A08CB8;
+
+    --display: 'Bricolage Grotesque', sans-serif;
+    --body: 'Instrument Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  html, body{ height: 100%; }
+  body{
+    font-family: var(--body);
+    background: var(--void);
+    color: var(--glow);
+    line-height: 1.6;
+    display: flex; flex-direction: column;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  a:focus-visible{ outline: 2px solid var(--filament); outline-offset: 3px; border-radius: 3px; }
+
+  nav{
+    border-bottom: 1px solid rgba(123,94,167,0.18);
+    background: rgba(21,11,30,0.9);
+    flex-shrink: 0;
+  }
+  .nav-in{
+    max-width: 940px; margin: 0 auto; padding: 15px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand{
+    font-family: var(--display); font-weight: 800; font-size: 1.12rem;
+    letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px;
+  }
+  .brand .bulb{
+    width: 9px; height: 9px; border-radius: 50%; background: var(--filament);
+    box-shadow: 0 0 10px var(--filament);
+  }
+  .back{ font-family: var(--mono); font-size: 0.78rem; color: var(--dim); }
+  .back:hover{ color: var(--filament); }
+
+  .shell{
+    flex: 1; display: flex; flex-direction: column; min-height: 0;
+    max-width: 940px; width: 100%; margin: 0 auto; padding: 26px 24px 34px;
+  }
+
+  .head{ flex-shrink: 0; margin-bottom: 20px; }
+  .head h1{
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.06;
+    letter-spacing: -0.035em; margin-bottom: 8px;
+  }
+  .head h1 em{ font-style: normal; color: var(--filament); }
+  .head p{ color: var(--dim); font-size: 0.98rem; max-width: 52ch; }
+
+  /* The chat itself fills the remaining height */
+  .chat-frame{
+    flex: 1; min-height: 420px;
+    border: 1px solid rgba(123,94,167,0.3); border-radius: 16px;
+    overflow: hidden; background: var(--plum);
+    display: flex; flex-direction: column;
+  }
+  zapier-interfaces-chatbot-embed{
+    flex: 1; width: 100%; height: 100%; display: block;
+  }
+
+  /* Shown only if the chat can't load */
+  .fallback{
+    display: none; padding: 40px 30px; text-align: center; color: var(--dim);
+  }
+  .fallback.show{ display: block; }
+  .fallback strong{ color: var(--glow); display: block; margin-bottom: 8px;
+    font-family: var(--display); font-size: 1.1rem; }
+
+  .tips{
+    flex-shrink: 0; margin-top: 16px;
+    font-family: var(--mono); font-size: 0.72rem; color: var(--dim);
+    letter-spacing: 0.04em; display: flex; gap: 18px; flex-wrap: wrap;
+  }
+  .tips span{ display: inline-flex; align-items: center; gap: 7px; }
+  .tips i{
+    width: 5px; height: 5px; border-radius: 50%; background: var(--filament);
+    display: inline-block; flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="powerllm.html" class="brand"><span class="bulb"></span>PowerLLM</a>
+    <a href="powerllm.html" class="back">← Back to site</a>
+  </div>
+</nav>
+
+<div class="shell">
+  <div class="head">
+    <h1>What are you <em>stuck on?</em></h1>
+    <p>Ask anything — a bug you can't place, an idea you can't word, a concept that hasn't clicked yet.</p>
+  </div>
+
+  <div class="chat-frame">
+    <zapier-interfaces-chatbot-embed
+      is-popup="false"
+      chatbot-id="cmtec4lg3003wz54o00yxa4v7"></zapier-interfaces-chatbot-embed>
+
+    <div class="fallback" id="fallback">
+      <strong>The chat didn't load</strong>
+      Check your connection and refresh the page. If you're opening this file
+      from your computer rather than the live site, it won't load here.
+    </div>
+  </div>
+
+  <div class="tips">
+    <span><i></i>Paste an error and ask what's causing it</span>
+    <span><i></i>Ask for a shorter answer any time</span>
+    <span><i></i>It remembers the conversation</span>
+  </div>
+</div>
+
+<script async type="module" src="https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js"></script>
+
+<script>
+  // If the embed script never defines the element, show a plain explanation
+  // instead of an empty box.
+  (function(){
+    setTimeout(function(){
+      var defined = window.customElements
+        && window.customElements.get('zapier-interfaces-chatbot-embed');
+      if (!defined){
+        var fb = document.getElementById('fallback');
+        if (fb) fb.classList.add('show');
+      }
+    }, 6000);
+  })();
+</script>
+
+</body>
+</html>
